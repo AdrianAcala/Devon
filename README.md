@@ -154,6 +154,54 @@ For a list of all commands available:
 ```bash
 devon-tui --help
 ```
+---
+
+# Docker Deployment
+For those who prefer using Docker, we've provided a Dockerfile and docker-compose.yml file to easily set up and run Devon in a containerized environment.
+
+## Prerequisites
+
+- Docker
+- Docker Compose (optional, for docker-compose method)
+
+## Option 1: Using Docker Run
+
+Build the Docker image:
+```bash
+docker build -t devon .
+```
+
+Run the Docker container:
+```bash
+docker run -p 3000:3000 -e ANTHROPIC_API_KEY=your_api_key_here -v $(pwd):/app devon
+```
+Replace ANTHROPIC_API_KEY with OPENAI_API_KEY or GROQ_API_KEY if you're using a different API.
+
+## Option 2: Using Docker Compose
+
+Make sure you have the `docker-compose.yml` file in your project root.
+Set your API key as an environment variable:
+
+```bash
+export ANTHROPIC_API_KEY=your_api_key_here
+# OR
+export OPENAI_API_KEY=your_api_key_here
+# OR
+export GROQ_API_KEY=your_api_key_here
+```
+
+### Run Devon using Docker Compose:
+```bash
+docker-compose up --build
+```
+This command will build the Docker image if it doesn't exist and start the Devon UI.
+To stop the container, use:
+bashCopydocker-compose down
+
+
+In both options, the Devon UI will be accessible at http://localhost:3000 in your web browser.
+
+**Note**: When using Docker, any changes you make within the container will persist as long as you use the same container. If you need to make changes to the Devon code itself, you may need to rebuild the Docker image.
 
 # Features
 - Multi-file editing
